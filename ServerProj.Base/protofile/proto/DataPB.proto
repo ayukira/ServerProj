@@ -1,0 +1,24 @@
+syntax = "proto3";
+//生成的包名
+package ServerProto;
+
+message BaseMessage{
+    string  auth = 1;           //身份验证
+    int32   userid = 2;         //用户id
+    int32   msg_type = 3;       //消息类型 1:客户端消息 2:服务端消息 3:服务端推送 4:心跳包
+    int32   main_command = 4;   //主命令
+    int64   command = 5;        //子命令
+    bytes   content = 6;        //消息内容
+    int64   time = 7;           //消息时间
+}
+
+
+
+message Service_Info{
+    int64 serviceId = 1; //服务器id
+    string host = 2;     //服务器grpc host
+    int32   port = 3;    //服务器grpc port
+    int32  serviceType = 4;//服务器类型
+    string socketHost = 5;//服务器socketHost
+    int32 socketPort = 6;//服务器socketPort
+}

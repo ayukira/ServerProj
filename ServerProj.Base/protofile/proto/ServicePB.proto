@@ -1,0 +1,69 @@
+﻿syntax = "proto3";
+import "BasePB.proto";
+import "DataPB.proto";
+//生成的包名
+package ServerProto;
+service RegistryGrpc {
+  rpc Registry (RegistryService_Request) returns (RegistryService_Response);
+  rpc UnRegistry (UnRegistryService_Request) returns (UnRegistryService_Response);
+  rpc Trick (Trick_Request) returns (Trick_Response);
+  rpc Connect (stream Connect_Request) returns (stream Connect_Response);
+  rpc ConnectRegistry (Connect_Request) returns (stream Connect_Response);
+  rpc ServiceList (ServiceList_Request) returns (ServiceList_Response);
+}
+service ServiceGrpc {
+    rpc CallMessage (Server_Message) returns (Server_Message);
+    rpc PushMessage (Service_Info) returns (stream Server_Message);
+}
+message RegistryService_Request {
+   Service_Info  info = 1; //服务信息
+}
+message RegistryService_Response {
+  int64 serviceId = 1; //服务id
+}
+
+message UnRegistryService_Request {
+   int64 serviceId = 1; //服务id
+}
+
+message UnRegistryService_Response {
+    bool result =1;
+}
+
+message Connect_Request{
+    int64 serviceId = 1; //服务id
+    int32 data_type = 2; //1.新增服务器,2.移除服务器
+    bytes data = 3;      //数据
+}
+
+message Connect_Response{
+    int32 data_type = 1; //数据类型 1.新增服务器,2.移除服务器
+    bytes data = 2;      //数据
+}
+
+message Trick_Request{
+    int64 time = 1;
+    int32 state = 2;     
+    int64 serviceId  = 3; //服务id
+}
+
+message Trick_Response{
+    int64 time = 1;
+    int32 state = 2;  
+}
+
+message ServiceList_Request{
+   int32 serviceType = 1; //服务器类型
+}
+message ServiceList_Response{
+  repeated Service_Info services = 1; //服务器列表
+}
+
+message Server_Message {
+    int32 userid = 1; //用户id
+    int32 mian = 2;   //主命令
+    int32 sub = 3 ;    //子命令
+    bytes data = 4 ;   //数据
+    int64 serviceId = 5 ; 
+    int32 serviceType = 6; 
+}

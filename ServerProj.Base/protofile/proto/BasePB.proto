@@ -1,0 +1,9 @@
+syntax = "proto3";
+//生成的包名
+package ServerProto;
+
+message Result_Info {
+    int32 result  =1;
+   int32 code = 2;
+   string message = 3;
+}

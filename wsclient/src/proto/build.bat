@@ -1,0 +1,1 @@
+npx pbjs -t json-module -w commonjs -o src/proto/proto.js  src/proto/*.proto
