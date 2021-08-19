@@ -1,6 +1,6 @@
 syntax = "proto3";
 //生成的包名
-package Netty.Base;
+package ServerProto;
 
 message BaseMessage{
     string  auth = 1;           //身份验证

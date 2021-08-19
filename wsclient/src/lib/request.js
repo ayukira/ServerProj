@@ -1,5 +1,5 @@
 import protoBase from "../proto/proto"
-const RootPath = 'Netty.Base.'
+const RootPath = 'ServerProto.'
 var request = {
     create: function (data) {
         var requestMsg = protoBase.lookup(RootPath + 'BaseMessage')
