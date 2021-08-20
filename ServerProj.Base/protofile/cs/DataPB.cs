@@ -24,433 +24,32 @@ namespace ServerProto {
     static DataPBReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgxEYXRhUEIucHJvdG8SC1NlcnZlclByb3RvIoMBCgtCYXNlTWVzc2FnZRIM",
-            "CgRhdXRoGAEgASgJEg4KBnVzZXJpZBgCIAEoBRIQCghtc2dfdHlwZRgDIAEo",
-            "BRIUCgxtYWluX2NvbW1hbmQYBCABKAUSDwoHY29tbWFuZBgFIAEoAxIPCgdj",
-            "b250ZW50GAYgASgMEgwKBHRpbWUYByABKAMiegoMU2VydmljZV9JbmZvEhEK",
-            "CXNlcnZpY2VJZBgBIAEoAxIMCgRob3N0GAIgASgJEgwKBHBvcnQYAyABKAUS",
-            "EwoLc2VydmljZVR5cGUYBCABKAUSEgoKc29ja2V0SG9zdBgFIAEoCRISCgpz",
-            "b2NrZXRQb3J0GAYgASgFYgZwcm90bzM="));
+            "CgxEYXRhUEIucHJvdG8SC1NlcnZlclByb3RvInoKDFNlcnZpY2VfSW5mbxIR",
+            "CglzZXJ2aWNlSWQYASABKAMSDAoEaG9zdBgCIAEoCRIMCgRwb3J0GAMgASgF",
+            "EhMKC3NlcnZpY2VUeXBlGAQgASgFEhIKCnNvY2tldEhvc3QYBSABKAkSEgoK",
+            "c29ja2V0UG9ydBgGIAEoBSJoCg5Tb2NrZXRfUGFja2FnZRIUCgxtYWluX2Nv",
+            "bW1hbmQYASABKAUSDwoHY29tbWFuZBgCIAEoAxIQCghtc2dfdHlwZRgDIAEo",
+            "BRIPCgdjb250ZW50GAQgASgMEgwKBHRpbWUYBSABKAMikAEKDlNlcnZlcl9Q",
+            "YWNrYWdlEhIKCnNlcnZpY2VfaWQYASABKAMSFAoMc2VydmljZV90eXBlGAIg",
+            "ASgFEg4KBnVzZXJpZBgDIAEoAxIUCgxtYWluX2NvbW1hbmQYBCABKAUSDwoH",
+            "Y29tbWFuZBgFIAEoAxIPCgdjb250ZW50GAYgASgMEgwKBHRpbWUYByABKAMi",
+            "GgoLVGVzdE1lc3NhZ2USCwoDbXNnGAEgASgJYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::ServerProto.BaseMessage), global::ServerProto.BaseMessage.Parser, new[]{ "Auth", "Userid", "MsgType", "MainCommand", "Command", "Content", "Time" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::ServerProto.Service_Info), global::ServerProto.Service_Info.Parser, new[]{ "ServiceId", "Host", "Port", "ServiceType", "SocketHost", "SocketPort" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::ServerProto.Service_Info), global::ServerProto.Service_Info.Parser, new[]{ "ServiceId", "Host", "Port", "ServiceType", "SocketHost", "SocketPort" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ServerProto.Socket_Package), global::ServerProto.Socket_Package.Parser, new[]{ "MainCommand", "Command", "MsgType", "Content", "Time" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ServerProto.Server_Package), global::ServerProto.Server_Package.Parser, new[]{ "ServiceId", "ServiceType", "Userid", "MainCommand", "Command", "Content", "Time" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ServerProto.TestMessage), global::ServerProto.TestMessage.Parser, new[]{ "Msg" }, null, null, null, null)
           }));
     }
     #endregion
 
   }
   #region Messages
-  public sealed partial class BaseMessage : pb::IMessage<BaseMessage>
-  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      , pb::IBufferMessage
-  #endif
-  {
-    private static readonly pb::MessageParser<BaseMessage> _parser = new pb::MessageParser<BaseMessage>(() => new BaseMessage());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<BaseMessage> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::ServerProto.DataPBReflection.Descriptor.MessageTypes[0]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BaseMessage() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BaseMessage(BaseMessage other) : this() {
-      auth_ = other.auth_;
-      userid_ = other.userid_;
-      msgType_ = other.msgType_;
-      mainCommand_ = other.mainCommand_;
-      command_ = other.command_;
-      content_ = other.content_;
-      time_ = other.time_;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public BaseMessage Clone() {
-      return new BaseMessage(this);
-    }
-
-    /// <summary>Field number for the "auth" field.</summary>
-    public const int AuthFieldNumber = 1;
-    private string auth_ = "";
-    /// <summary>
-    ///身份验证
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Auth {
-      get { return auth_; }
-      set {
-        auth_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "userid" field.</summary>
-    public const int UseridFieldNumber = 2;
-    private int userid_;
-    /// <summary>
-    ///用户id
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Userid {
-      get { return userid_; }
-      set {
-        userid_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "msg_type" field.</summary>
-    public const int MsgTypeFieldNumber = 3;
-    private int msgType_;
-    /// <summary>
-    ///消息类型 1:客户端消息 2:服务端消息 3:服务端推送 4:心跳包
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int MsgType {
-      get { return msgType_; }
-      set {
-        msgType_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "main_command" field.</summary>
-    public const int MainCommandFieldNumber = 4;
-    private int mainCommand_;
-    /// <summary>
-    ///主命令
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int MainCommand {
-      get { return mainCommand_; }
-      set {
-        mainCommand_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "command" field.</summary>
-    public const int CommandFieldNumber = 5;
-    private long command_;
-    /// <summary>
-    ///子命令
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long Command {
-      get { return command_; }
-      set {
-        command_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "content" field.</summary>
-    public const int ContentFieldNumber = 6;
-    private pb::ByteString content_ = pb::ByteString.Empty;
-    /// <summary>
-    ///消息内容
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pb::ByteString Content {
-      get { return content_; }
-      set {
-        content_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "time" field.</summary>
-    public const int TimeFieldNumber = 7;
-    private long time_;
-    /// <summary>
-    ///消息时间
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long Time {
-      get { return time_; }
-      set {
-        time_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as BaseMessage);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(BaseMessage other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (Auth != other.Auth) return false;
-      if (Userid != other.Userid) return false;
-      if (MsgType != other.MsgType) return false;
-      if (MainCommand != other.MainCommand) return false;
-      if (Command != other.Command) return false;
-      if (Content != other.Content) return false;
-      if (Time != other.Time) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (Auth.Length != 0) hash ^= Auth.GetHashCode();
-      if (Userid != 0) hash ^= Userid.GetHashCode();
-      if (MsgType != 0) hash ^= MsgType.GetHashCode();
-      if (MainCommand != 0) hash ^= MainCommand.GetHashCode();
-      if (Command != 0L) hash ^= Command.GetHashCode();
-      if (Content.Length != 0) hash ^= Content.GetHashCode();
-      if (Time != 0L) hash ^= Time.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      output.WriteRawMessage(this);
-    #else
-      if (Auth.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(Auth);
-      }
-      if (Userid != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(Userid);
-      }
-      if (MsgType != 0) {
-        output.WriteRawTag(24);
-        output.WriteInt32(MsgType);
-      }
-      if (MainCommand != 0) {
-        output.WriteRawTag(32);
-        output.WriteInt32(MainCommand);
-      }
-      if (Command != 0L) {
-        output.WriteRawTag(40);
-        output.WriteInt64(Command);
-      }
-      if (Content.Length != 0) {
-        output.WriteRawTag(50);
-        output.WriteBytes(Content);
-      }
-      if (Time != 0L) {
-        output.WriteRawTag(56);
-        output.WriteInt64(Time);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (Auth.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(Auth);
-      }
-      if (Userid != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(Userid);
-      }
-      if (MsgType != 0) {
-        output.WriteRawTag(24);
-        output.WriteInt32(MsgType);
-      }
-      if (MainCommand != 0) {
-        output.WriteRawTag(32);
-        output.WriteInt32(MainCommand);
-      }
-      if (Command != 0L) {
-        output.WriteRawTag(40);
-        output.WriteInt64(Command);
-      }
-      if (Content.Length != 0) {
-        output.WriteRawTag(50);
-        output.WriteBytes(Content);
-      }
-      if (Time != 0L) {
-        output.WriteRawTag(56);
-        output.WriteInt64(Time);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(ref output);
-      }
-    }
-    #endif
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (Auth.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Auth);
-      }
-      if (Userid != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Userid);
-      }
-      if (MsgType != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(MsgType);
-      }
-      if (MainCommand != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(MainCommand);
-      }
-      if (Command != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Command);
-      }
-      if (Content.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Content);
-      }
-      if (Time != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Time);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(BaseMessage other) {
-      if (other == null) {
-        return;
-      }
-      if (other.Auth.Length != 0) {
-        Auth = other.Auth;
-      }
-      if (other.Userid != 0) {
-        Userid = other.Userid;
-      }
-      if (other.MsgType != 0) {
-        MsgType = other.MsgType;
-      }
-      if (other.MainCommand != 0) {
-        MainCommand = other.MainCommand;
-      }
-      if (other.Command != 0L) {
-        Command = other.Command;
-      }
-      if (other.Content.Length != 0) {
-        Content = other.Content;
-      }
-      if (other.Time != 0L) {
-        Time = other.Time;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      input.ReadRawMessage(this);
-    #else
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            Auth = input.ReadString();
-            break;
-          }
-          case 16: {
-            Userid = input.ReadInt32();
-            break;
-          }
-          case 24: {
-            MsgType = input.ReadInt32();
-            break;
-          }
-          case 32: {
-            MainCommand = input.ReadInt32();
-            break;
-          }
-          case 40: {
-            Command = input.ReadInt64();
-            break;
-          }
-          case 50: {
-            Content = input.ReadBytes();
-            break;
-          }
-          case 56: {
-            Time = input.ReadInt64();
-            break;
-          }
-        }
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
-            break;
-          case 10: {
-            Auth = input.ReadString();
-            break;
-          }
-          case 16: {
-            Userid = input.ReadInt32();
-            break;
-          }
-          case 24: {
-            MsgType = input.ReadInt32();
-            break;
-          }
-          case 32: {
-            MainCommand = input.ReadInt32();
-            break;
-          }
-          case 40: {
-            Command = input.ReadInt64();
-            break;
-          }
-          case 50: {
-            Content = input.ReadBytes();
-            break;
-          }
-          case 56: {
-            Time = input.ReadInt64();
-            break;
-          }
-        }
-      }
-    }
-    #endif
-
-  }
-
+  /// <summary>
+  ///服务器信息
+  /// </summary>
   public sealed partial class Service_Info : pb::IMessage<Service_Info>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -463,7 +62,7 @@ namespace ServerProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::ServerProto.DataPBReflection.Descriptor.MessageTypes[1]; }
+      get { return global::ServerProto.DataPBReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -812,6 +411,927 @@ namespace ServerProto {
           }
           case 48: {
             SocketPort = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  /// <summary>
+  ///Socket包
+  /// </summary>
+  public sealed partial class Socket_Package : pb::IMessage<Socket_Package>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<Socket_Package> _parser = new pb::MessageParser<Socket_Package>(() => new Socket_Package());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<Socket_Package> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ServerProto.DataPBReflection.Descriptor.MessageTypes[1]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Socket_Package() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Socket_Package(Socket_Package other) : this() {
+      mainCommand_ = other.mainCommand_;
+      command_ = other.command_;
+      msgType_ = other.msgType_;
+      content_ = other.content_;
+      time_ = other.time_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Socket_Package Clone() {
+      return new Socket_Package(this);
+    }
+
+    /// <summary>Field number for the "main_command" field.</summary>
+    public const int MainCommandFieldNumber = 1;
+    private int mainCommand_;
+    /// <summary>
+    ///主命令
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int MainCommand {
+      get { return mainCommand_; }
+      set {
+        mainCommand_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "command" field.</summary>
+    public const int CommandFieldNumber = 2;
+    private long command_;
+    /// <summary>
+    ///子命令
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long Command {
+      get { return command_; }
+      set {
+        command_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "msg_type" field.</summary>
+    public const int MsgTypeFieldNumber = 3;
+    private int msgType_;
+    /// <summary>
+    ///数据类型 1.通用消息
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int MsgType {
+      get { return msgType_; }
+      set {
+        msgType_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "content" field.</summary>
+    public const int ContentFieldNumber = 4;
+    private pb::ByteString content_ = pb::ByteString.Empty;
+    /// <summary>
+    ///数据
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pb::ByteString Content {
+      get { return content_; }
+      set {
+        content_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "time" field.</summary>
+    public const int TimeFieldNumber = 5;
+    private long time_;
+    /// <summary>
+    ///时间戳
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long Time {
+      get { return time_; }
+      set {
+        time_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as Socket_Package);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(Socket_Package other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (MainCommand != other.MainCommand) return false;
+      if (Command != other.Command) return false;
+      if (MsgType != other.MsgType) return false;
+      if (Content != other.Content) return false;
+      if (Time != other.Time) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (MainCommand != 0) hash ^= MainCommand.GetHashCode();
+      if (Command != 0L) hash ^= Command.GetHashCode();
+      if (MsgType != 0) hash ^= MsgType.GetHashCode();
+      if (Content.Length != 0) hash ^= Content.GetHashCode();
+      if (Time != 0L) hash ^= Time.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (MainCommand != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(MainCommand);
+      }
+      if (Command != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(Command);
+      }
+      if (MsgType != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(MsgType);
+      }
+      if (Content.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteBytes(Content);
+      }
+      if (Time != 0L) {
+        output.WriteRawTag(40);
+        output.WriteInt64(Time);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (MainCommand != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(MainCommand);
+      }
+      if (Command != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(Command);
+      }
+      if (MsgType != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(MsgType);
+      }
+      if (Content.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteBytes(Content);
+      }
+      if (Time != 0L) {
+        output.WriteRawTag(40);
+        output.WriteInt64(Time);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (MainCommand != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(MainCommand);
+      }
+      if (Command != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Command);
+      }
+      if (MsgType != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(MsgType);
+      }
+      if (Content.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Content);
+      }
+      if (Time != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Time);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(Socket_Package other) {
+      if (other == null) {
+        return;
+      }
+      if (other.MainCommand != 0) {
+        MainCommand = other.MainCommand;
+      }
+      if (other.Command != 0L) {
+        Command = other.Command;
+      }
+      if (other.MsgType != 0) {
+        MsgType = other.MsgType;
+      }
+      if (other.Content.Length != 0) {
+        Content = other.Content;
+      }
+      if (other.Time != 0L) {
+        Time = other.Time;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            MainCommand = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            Command = input.ReadInt64();
+            break;
+          }
+          case 24: {
+            MsgType = input.ReadInt32();
+            break;
+          }
+          case 34: {
+            Content = input.ReadBytes();
+            break;
+          }
+          case 40: {
+            Time = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            MainCommand = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            Command = input.ReadInt64();
+            break;
+          }
+          case 24: {
+            MsgType = input.ReadInt32();
+            break;
+          }
+          case 34: {
+            Content = input.ReadBytes();
+            break;
+          }
+          case 40: {
+            Time = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  /// <summary>
+  ///服务包
+  /// </summary>
+  public sealed partial class Server_Package : pb::IMessage<Server_Package>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<Server_Package> _parser = new pb::MessageParser<Server_Package>(() => new Server_Package());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<Server_Package> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ServerProto.DataPBReflection.Descriptor.MessageTypes[2]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Server_Package() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Server_Package(Server_Package other) : this() {
+      serviceId_ = other.serviceId_;
+      serviceType_ = other.serviceType_;
+      userid_ = other.userid_;
+      mainCommand_ = other.mainCommand_;
+      command_ = other.command_;
+      content_ = other.content_;
+      time_ = other.time_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Server_Package Clone() {
+      return new Server_Package(this);
+    }
+
+    /// <summary>Field number for the "service_id" field.</summary>
+    public const int ServiceIdFieldNumber = 1;
+    private long serviceId_;
+    /// <summary>
+    ///服务id
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long ServiceId {
+      get { return serviceId_; }
+      set {
+        serviceId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "service_type" field.</summary>
+    public const int ServiceTypeFieldNumber = 2;
+    private int serviceType_;
+    /// <summary>
+    ///服务类型
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int ServiceType {
+      get { return serviceType_; }
+      set {
+        serviceType_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "userid" field.</summary>
+    public const int UseridFieldNumber = 3;
+    private long userid_;
+    /// <summary>
+    ///用户id
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long Userid {
+      get { return userid_; }
+      set {
+        userid_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "main_command" field.</summary>
+    public const int MainCommandFieldNumber = 4;
+    private int mainCommand_;
+    /// <summary>
+    ///主命令
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int MainCommand {
+      get { return mainCommand_; }
+      set {
+        mainCommand_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "command" field.</summary>
+    public const int CommandFieldNumber = 5;
+    private long command_;
+    /// <summary>
+    ///子命令
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long Command {
+      get { return command_; }
+      set {
+        command_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "content" field.</summary>
+    public const int ContentFieldNumber = 6;
+    private pb::ByteString content_ = pb::ByteString.Empty;
+    /// <summary>
+    ///数据
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pb::ByteString Content {
+      get { return content_; }
+      set {
+        content_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "time" field.</summary>
+    public const int TimeFieldNumber = 7;
+    private long time_;
+    /// <summary>
+    ///时间戳
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long Time {
+      get { return time_; }
+      set {
+        time_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as Server_Package);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(Server_Package other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (ServiceId != other.ServiceId) return false;
+      if (ServiceType != other.ServiceType) return false;
+      if (Userid != other.Userid) return false;
+      if (MainCommand != other.MainCommand) return false;
+      if (Command != other.Command) return false;
+      if (Content != other.Content) return false;
+      if (Time != other.Time) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (ServiceId != 0L) hash ^= ServiceId.GetHashCode();
+      if (ServiceType != 0) hash ^= ServiceType.GetHashCode();
+      if (Userid != 0L) hash ^= Userid.GetHashCode();
+      if (MainCommand != 0) hash ^= MainCommand.GetHashCode();
+      if (Command != 0L) hash ^= Command.GetHashCode();
+      if (Content.Length != 0) hash ^= Content.GetHashCode();
+      if (Time != 0L) hash ^= Time.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (ServiceId != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(ServiceId);
+      }
+      if (ServiceType != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(ServiceType);
+      }
+      if (Userid != 0L) {
+        output.WriteRawTag(24);
+        output.WriteInt64(Userid);
+      }
+      if (MainCommand != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(MainCommand);
+      }
+      if (Command != 0L) {
+        output.WriteRawTag(40);
+        output.WriteInt64(Command);
+      }
+      if (Content.Length != 0) {
+        output.WriteRawTag(50);
+        output.WriteBytes(Content);
+      }
+      if (Time != 0L) {
+        output.WriteRawTag(56);
+        output.WriteInt64(Time);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (ServiceId != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(ServiceId);
+      }
+      if (ServiceType != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(ServiceType);
+      }
+      if (Userid != 0L) {
+        output.WriteRawTag(24);
+        output.WriteInt64(Userid);
+      }
+      if (MainCommand != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(MainCommand);
+      }
+      if (Command != 0L) {
+        output.WriteRawTag(40);
+        output.WriteInt64(Command);
+      }
+      if (Content.Length != 0) {
+        output.WriteRawTag(50);
+        output.WriteBytes(Content);
+      }
+      if (Time != 0L) {
+        output.WriteRawTag(56);
+        output.WriteInt64(Time);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (ServiceId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(ServiceId);
+      }
+      if (ServiceType != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ServiceType);
+      }
+      if (Userid != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Userid);
+      }
+      if (MainCommand != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(MainCommand);
+      }
+      if (Command != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Command);
+      }
+      if (Content.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Content);
+      }
+      if (Time != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Time);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(Server_Package other) {
+      if (other == null) {
+        return;
+      }
+      if (other.ServiceId != 0L) {
+        ServiceId = other.ServiceId;
+      }
+      if (other.ServiceType != 0) {
+        ServiceType = other.ServiceType;
+      }
+      if (other.Userid != 0L) {
+        Userid = other.Userid;
+      }
+      if (other.MainCommand != 0) {
+        MainCommand = other.MainCommand;
+      }
+      if (other.Command != 0L) {
+        Command = other.Command;
+      }
+      if (other.Content.Length != 0) {
+        Content = other.Content;
+      }
+      if (other.Time != 0L) {
+        Time = other.Time;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            ServiceId = input.ReadInt64();
+            break;
+          }
+          case 16: {
+            ServiceType = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            Userid = input.ReadInt64();
+            break;
+          }
+          case 32: {
+            MainCommand = input.ReadInt32();
+            break;
+          }
+          case 40: {
+            Command = input.ReadInt64();
+            break;
+          }
+          case 50: {
+            Content = input.ReadBytes();
+            break;
+          }
+          case 56: {
+            Time = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            ServiceId = input.ReadInt64();
+            break;
+          }
+          case 16: {
+            ServiceType = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            Userid = input.ReadInt64();
+            break;
+          }
+          case 32: {
+            MainCommand = input.ReadInt32();
+            break;
+          }
+          case 40: {
+            Command = input.ReadInt64();
+            break;
+          }
+          case 50: {
+            Content = input.ReadBytes();
+            break;
+          }
+          case 56: {
+            Time = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class TestMessage : pb::IMessage<TestMessage>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<TestMessage> _parser = new pb::MessageParser<TestMessage>(() => new TestMessage());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<TestMessage> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ServerProto.DataPBReflection.Descriptor.MessageTypes[3]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public TestMessage() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public TestMessage(TestMessage other) : this() {
+      msg_ = other.msg_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public TestMessage Clone() {
+      return new TestMessage(this);
+    }
+
+    /// <summary>Field number for the "msg" field.</summary>
+    public const int MsgFieldNumber = 1;
+    private string msg_ = "";
+    /// <summary>
+    ///消息
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Msg {
+      get { return msg_; }
+      set {
+        msg_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as TestMessage);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(TestMessage other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Msg != other.Msg) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Msg.Length != 0) hash ^= Msg.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Msg.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Msg);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Msg.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Msg);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Msg.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Msg);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(TestMessage other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Msg.Length != 0) {
+        Msg = other.Msg;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Msg = input.ReadString();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            Msg = input.ReadString();
             break;
           }
         }

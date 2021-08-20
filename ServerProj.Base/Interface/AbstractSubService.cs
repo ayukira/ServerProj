@@ -31,7 +31,7 @@ namespace ServerProj.Base.Interface
         private RegistryGrpcClient _registryClient;
         private Channel _channel;
 
-        public abstract Server_Message Call(long serviceid,Server_Message server_message);
+        protected abstract Server_Package Call(long serviceid, Server_Package package);
 
         public AbstractSubService(string host, int port) 
         {
@@ -79,9 +79,9 @@ namespace ServerProj.Base.Interface
         }
         #region public
 
-        public bool Push(long serviceId, Server_Message message) 
+        public bool Push(long serviceId, Server_Package package) 
         {
-            return SubServiceGrpc.DequeuePush(serviceId, message);
+            return SubServiceGrpc.DequeuePush(serviceId, package);
         }
 
         #endregion

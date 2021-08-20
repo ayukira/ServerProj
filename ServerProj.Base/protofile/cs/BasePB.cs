@@ -80,6 +80,9 @@ namespace ServerProto {
     /// <summary>Field number for the "result" field.</summary>
     public const int ResultFieldNumber = 1;
     private int result_;
+    /// <summary>
+    ///结果
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int Result {
       get { return result_; }
@@ -91,6 +94,9 @@ namespace ServerProto {
     /// <summary>Field number for the "code" field.</summary>
     public const int CodeFieldNumber = 2;
     private int code_;
+    /// <summary>
+    ///返回代码
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int Code {
       get { return code_; }
@@ -102,6 +108,9 @@ namespace ServerProto {
     /// <summary>Field number for the "message" field.</summary>
     public const int MessageFieldNumber = 3;
     private string message_ = "";
+    /// <summary>
+    ///返回信息
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string Message {
       get { return message_; }

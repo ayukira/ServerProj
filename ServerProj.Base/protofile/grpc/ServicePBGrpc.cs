@@ -74,13 +74,6 @@ namespace ServerProto {
         __Marshaller_ServerProto_Trick_Request,
         __Marshaller_ServerProto_Trick_Response);
 
-    static readonly grpc::Method<global::ServerProto.Connect_Request, global::ServerProto.Connect_Response> __Method_Connect = new grpc::Method<global::ServerProto.Connect_Request, global::ServerProto.Connect_Response>(
-        grpc::MethodType.DuplexStreaming,
-        __ServiceName,
-        "Connect",
-        __Marshaller_ServerProto_Connect_Request,
-        __Marshaller_ServerProto_Connect_Response);
-
     static readonly grpc::Method<global::ServerProto.Connect_Request, global::ServerProto.Connect_Response> __Method_ConnectRegistry = new grpc::Method<global::ServerProto.Connect_Request, global::ServerProto.Connect_Response>(
         grpc::MethodType.ServerStreaming,
         __ServiceName,
@@ -105,31 +98,57 @@ namespace ServerProto {
     [grpc::BindServiceMethod(typeof(RegistryGrpc), "BindService")]
     public abstract partial class RegistryGrpcBase
     {
+      /// <summary>
+      ///注册
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
       public virtual global::System.Threading.Tasks.Task<global::ServerProto.RegistryService_Response> Registry(global::ServerProto.RegistryService_Request request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
+      /// <summary>
+      ///注销
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
       public virtual global::System.Threading.Tasks.Task<global::ServerProto.UnRegistryService_Response> UnRegistry(global::ServerProto.UnRegistryService_Request request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
+      /// <summary>
+      ///心跳
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
       public virtual global::System.Threading.Tasks.Task<global::ServerProto.Trick_Response> Trick(global::ServerProto.Trick_Request request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task Connect(grpc::IAsyncStreamReader<global::ServerProto.Connect_Request> requestStream, grpc::IServerStreamWriter<global::ServerProto.Connect_Response> responseStream, grpc::ServerCallContext context)
-      {
-        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
-      }
-
+      /// <summary>
+      ///rpc Connect (stream Connect_Request) returns (stream Connect_Response);             //通信
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="responseStream">Used for sending responses back to the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>A task indicating completion of the handler.</returns>
       public virtual global::System.Threading.Tasks.Task ConnectRegistry(global::ServerProto.Connect_Request request, grpc::IServerStreamWriter<global::ServerProto.Connect_Response> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
+      /// <summary>
+      ///获取服务器列表
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
       public virtual global::System.Threading.Tasks.Task<global::ServerProto.ServiceList_Response> ServiceList(global::ServerProto.ServiceList_Request request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
@@ -160,82 +179,200 @@ namespace ServerProto {
       {
       }
 
+      /// <summary>
+      ///注册
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
       public virtual global::ServerProto.RegistryService_Response Registry(global::ServerProto.RegistryService_Request request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return Registry(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
+      /// <summary>
+      ///注册
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
       public virtual global::ServerProto.RegistryService_Response Registry(global::ServerProto.RegistryService_Request request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_Registry, null, options, request);
       }
+      /// <summary>
+      ///注册
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
       public virtual grpc::AsyncUnaryCall<global::ServerProto.RegistryService_Response> RegistryAsync(global::ServerProto.RegistryService_Request request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return RegistryAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
+      /// <summary>
+      ///注册
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
       public virtual grpc::AsyncUnaryCall<global::ServerProto.RegistryService_Response> RegistryAsync(global::ServerProto.RegistryService_Request request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_Registry, null, options, request);
       }
+      /// <summary>
+      ///注销
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
       public virtual global::ServerProto.UnRegistryService_Response UnRegistry(global::ServerProto.UnRegistryService_Request request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return UnRegistry(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
+      /// <summary>
+      ///注销
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
       public virtual global::ServerProto.UnRegistryService_Response UnRegistry(global::ServerProto.UnRegistryService_Request request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_UnRegistry, null, options, request);
       }
+      /// <summary>
+      ///注销
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
       public virtual grpc::AsyncUnaryCall<global::ServerProto.UnRegistryService_Response> UnRegistryAsync(global::ServerProto.UnRegistryService_Request request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return UnRegistryAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
+      /// <summary>
+      ///注销
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
       public virtual grpc::AsyncUnaryCall<global::ServerProto.UnRegistryService_Response> UnRegistryAsync(global::ServerProto.UnRegistryService_Request request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_UnRegistry, null, options, request);
       }
+      /// <summary>
+      ///心跳
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
       public virtual global::ServerProto.Trick_Response Trick(global::ServerProto.Trick_Request request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return Trick(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
+      /// <summary>
+      ///心跳
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
       public virtual global::ServerProto.Trick_Response Trick(global::ServerProto.Trick_Request request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_Trick, null, options, request);
       }
+      /// <summary>
+      ///心跳
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
       public virtual grpc::AsyncUnaryCall<global::ServerProto.Trick_Response> TrickAsync(global::ServerProto.Trick_Request request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return TrickAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
+      /// <summary>
+      ///心跳
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
       public virtual grpc::AsyncUnaryCall<global::ServerProto.Trick_Response> TrickAsync(global::ServerProto.Trick_Request request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_Trick, null, options, request);
       }
-      public virtual grpc::AsyncDuplexStreamingCall<global::ServerProto.Connect_Request, global::ServerProto.Connect_Response> Connect(grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
-      {
-        return Connect(new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      public virtual grpc::AsyncDuplexStreamingCall<global::ServerProto.Connect_Request, global::ServerProto.Connect_Response> Connect(grpc::CallOptions options)
-      {
-        return CallInvoker.AsyncDuplexStreamingCall(__Method_Connect, null, options);
-      }
+      /// <summary>
+      ///rpc Connect (stream Connect_Request) returns (stream Connect_Response);             //通信
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
       public virtual grpc::AsyncServerStreamingCall<global::ServerProto.Connect_Response> ConnectRegistry(global::ServerProto.Connect_Request request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return ConnectRegistry(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
+      /// <summary>
+      ///rpc Connect (stream Connect_Request) returns (stream Connect_Response);             //通信
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
       public virtual grpc::AsyncServerStreamingCall<global::ServerProto.Connect_Response> ConnectRegistry(global::ServerProto.Connect_Request request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncServerStreamingCall(__Method_ConnectRegistry, null, options, request);
       }
+      /// <summary>
+      ///获取服务器列表
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
       public virtual global::ServerProto.ServiceList_Response ServiceList(global::ServerProto.ServiceList_Request request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return ServiceList(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
+      /// <summary>
+      ///获取服务器列表
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
       public virtual global::ServerProto.ServiceList_Response ServiceList(global::ServerProto.ServiceList_Request request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_ServiceList, null, options, request);
       }
+      /// <summary>
+      ///获取服务器列表
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
       public virtual grpc::AsyncUnaryCall<global::ServerProto.ServiceList_Response> ServiceListAsync(global::ServerProto.ServiceList_Request request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return ServiceListAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
+      /// <summary>
+      ///获取服务器列表
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
       public virtual grpc::AsyncUnaryCall<global::ServerProto.ServiceList_Response> ServiceListAsync(global::ServerProto.ServiceList_Request request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_ServiceList, null, options, request);
@@ -255,7 +392,6 @@ namespace ServerProto {
           .AddMethod(__Method_Registry, serviceImpl.Registry)
           .AddMethod(__Method_UnRegistry, serviceImpl.UnRegistry)
           .AddMethod(__Method_Trick, serviceImpl.Trick)
-          .AddMethod(__Method_Connect, serviceImpl.Connect)
           .AddMethod(__Method_ConnectRegistry, serviceImpl.ConnectRegistry)
           .AddMethod(__Method_ServiceList, serviceImpl.ServiceList).Build();
     }
@@ -269,7 +405,6 @@ namespace ServerProto {
       serviceBinder.AddMethod(__Method_Registry, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::ServerProto.RegistryService_Request, global::ServerProto.RegistryService_Response>(serviceImpl.Registry));
       serviceBinder.AddMethod(__Method_UnRegistry, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::ServerProto.UnRegistryService_Request, global::ServerProto.UnRegistryService_Response>(serviceImpl.UnRegistry));
       serviceBinder.AddMethod(__Method_Trick, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::ServerProto.Trick_Request, global::ServerProto.Trick_Response>(serviceImpl.Trick));
-      serviceBinder.AddMethod(__Method_Connect, serviceImpl == null ? null : new grpc::DuplexStreamingServerMethod<global::ServerProto.Connect_Request, global::ServerProto.Connect_Response>(serviceImpl.Connect));
       serviceBinder.AddMethod(__Method_ConnectRegistry, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::ServerProto.Connect_Request, global::ServerProto.Connect_Response>(serviceImpl.ConnectRegistry));
       serviceBinder.AddMethod(__Method_ServiceList, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::ServerProto.ServiceList_Request, global::ServerProto.ServiceList_Response>(serviceImpl.ServiceList));
     }
@@ -309,22 +444,22 @@ namespace ServerProto {
       return parser.ParseFrom(context.PayloadAsNewBuffer());
     }
 
-    static readonly grpc::Marshaller<global::ServerProto.Server_Message> __Marshaller_ServerProto_Server_Message = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::ServerProto.Server_Message.Parser));
+    static readonly grpc::Marshaller<global::ServerProto.Server_Package> __Marshaller_ServerProto_Server_Package = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::ServerProto.Server_Package.Parser));
     static readonly grpc::Marshaller<global::ServerProto.Service_Info> __Marshaller_ServerProto_Service_Info = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::ServerProto.Service_Info.Parser));
 
-    static readonly grpc::Method<global::ServerProto.Server_Message, global::ServerProto.Server_Message> __Method_CallMessage = new grpc::Method<global::ServerProto.Server_Message, global::ServerProto.Server_Message>(
+    static readonly grpc::Method<global::ServerProto.Server_Package, global::ServerProto.Server_Package> __Method_CallMessage = new grpc::Method<global::ServerProto.Server_Package, global::ServerProto.Server_Package>(
         grpc::MethodType.Unary,
         __ServiceName,
         "CallMessage",
-        __Marshaller_ServerProto_Server_Message,
-        __Marshaller_ServerProto_Server_Message);
+        __Marshaller_ServerProto_Server_Package,
+        __Marshaller_ServerProto_Server_Package);
 
-    static readonly grpc::Method<global::ServerProto.Service_Info, global::ServerProto.Server_Message> __Method_PushMessage = new grpc::Method<global::ServerProto.Service_Info, global::ServerProto.Server_Message>(
+    static readonly grpc::Method<global::ServerProto.Service_Info, global::ServerProto.Server_Package> __Method_PushMessage = new grpc::Method<global::ServerProto.Service_Info, global::ServerProto.Server_Package>(
         grpc::MethodType.ServerStreaming,
         __ServiceName,
         "PushMessage",
         __Marshaller_ServerProto_Service_Info,
-        __Marshaller_ServerProto_Server_Message);
+        __Marshaller_ServerProto_Server_Package);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -336,12 +471,12 @@ namespace ServerProto {
     [grpc::BindServiceMethod(typeof(ServiceGrpc), "BindService")]
     public abstract partial class ServiceGrpcBase
     {
-      public virtual global::System.Threading.Tasks.Task<global::ServerProto.Server_Message> CallMessage(global::ServerProto.Server_Message request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::ServerProto.Server_Package> CallMessage(global::ServerProto.Server_Package request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task PushMessage(global::ServerProto.Service_Info request, grpc::IServerStreamWriter<global::ServerProto.Server_Message> responseStream, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task PushMessage(global::ServerProto.Service_Info request, grpc::IServerStreamWriter<global::ServerProto.Server_Package> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -371,27 +506,27 @@ namespace ServerProto {
       {
       }
 
-      public virtual global::ServerProto.Server_Message CallMessage(global::ServerProto.Server_Message request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::ServerProto.Server_Package CallMessage(global::ServerProto.Server_Package request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return CallMessage(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::ServerProto.Server_Message CallMessage(global::ServerProto.Server_Message request, grpc::CallOptions options)
+      public virtual global::ServerProto.Server_Package CallMessage(global::ServerProto.Server_Package request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_CallMessage, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::ServerProto.Server_Message> CallMessageAsync(global::ServerProto.Server_Message request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::ServerProto.Server_Package> CallMessageAsync(global::ServerProto.Server_Package request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return CallMessageAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::ServerProto.Server_Message> CallMessageAsync(global::ServerProto.Server_Message request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::ServerProto.Server_Package> CallMessageAsync(global::ServerProto.Server_Package request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_CallMessage, null, options, request);
       }
-      public virtual grpc::AsyncServerStreamingCall<global::ServerProto.Server_Message> PushMessage(global::ServerProto.Service_Info request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncServerStreamingCall<global::ServerProto.Server_Package> PushMessage(global::ServerProto.Service_Info request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return PushMessage(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncServerStreamingCall<global::ServerProto.Server_Message> PushMessage(global::ServerProto.Service_Info request, grpc::CallOptions options)
+      public virtual grpc::AsyncServerStreamingCall<global::ServerProto.Server_Package> PushMessage(global::ServerProto.Service_Info request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncServerStreamingCall(__Method_PushMessage, null, options, request);
       }
@@ -417,8 +552,8 @@ namespace ServerProto {
     /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
     public static void BindService(grpc::ServiceBinderBase serviceBinder, ServiceGrpcBase serviceImpl)
     {
-      serviceBinder.AddMethod(__Method_CallMessage, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::ServerProto.Server_Message, global::ServerProto.Server_Message>(serviceImpl.CallMessage));
-      serviceBinder.AddMethod(__Method_PushMessage, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::ServerProto.Service_Info, global::ServerProto.Server_Message>(serviceImpl.PushMessage));
+      serviceBinder.AddMethod(__Method_CallMessage, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::ServerProto.Server_Package, global::ServerProto.Server_Package>(serviceImpl.CallMessage));
+      serviceBinder.AddMethod(__Method_PushMessage, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::ServerProto.Service_Info, global::ServerProto.Server_Package>(serviceImpl.PushMessage));
     }
 
   }

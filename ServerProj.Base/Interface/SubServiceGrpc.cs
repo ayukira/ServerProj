@@ -11,47 +11,41 @@ namespace ServerProj.Base.Interface
     public class SubServiceGrpc : ServiceGrpcBase
     {
         private readonly ConcurrentDictionary<long, PushQueue> _queues = new();
-        private event Func<long, Server_Message, Server_Message> OnCall;
-        public override Task<Server_Message> CallMessage(Server_Message request, ServerCallContext context)
+        private event Func<long, Server_Package, Server_Package> call;
+        public override Task<Server_Package> CallMessage(Server_Package package, ServerCallContext context)
         {
-            return Task.FromResult(Call(request.ServiceId,request));
+            return Task.FromResult(call(package.ServiceId,package));
         }
 
-        public SubServiceGrpc(Func<long,Server_Message, Server_Message> func) 
+        public SubServiceGrpc(Func<long, Server_Package, Server_Package> func) 
         {
             if (func == null) throw new Exception("func is null");
-            OnCall += func;
+            call = func;
         }
 
-        public override async Task PushMessage(Service_Info request, IServerStreamWriter<Server_Message> responseStream, ServerCallContext context)
+        public override async Task PushMessage(Service_Info serverInfo, IServerStreamWriter<Server_Package> responseStream, ServerCallContext context)
         {
-            var queue = _queues.GetOrAdd(request.ServiceId, o => new PushQueue(request.ToServer()));
+            var queue = _queues.GetOrAdd(serverInfo.ServiceId, o => new PushQueue(serverInfo.ToServer()));
             await Push(queue, responseStream);
         }
-
-        public Server_Message Call(long serviceid,Server_Message message)
-        {
-            //DequeuePush(message.ServiceId, message);
-            return OnCall(serviceid, message);
-        }
-        public async Task Push(PushQueue queue, IServerStreamWriter<Server_Message> responseStream)
+        public async Task Push(PushQueue queue, IServerStreamWriter<Server_Package> responseStream)
         {
             while (queue.ResetEvent.WaitOne())
             {
-                if (!queue.Queue.TryDequeue(out var data))
+                if (!queue.Queue.TryDequeue(out var package))
                 {
                     queue.ResetEvent.Reset();
                     continue;
                 }
-                await responseStream.WriteAsync(data);
+                await responseStream.WriteAsync(package);
             }
         }
 
-        public bool DequeuePush(long serviceId, Server_Message message)
+        public bool DequeuePush(long serviceId, Server_Package package)
         {
             var queue = _queues.Get(serviceId);
             if (queue == null) return false;
-            return queue.EnqueueDatas(message);
+            return queue.EnqueueDatas(package);
         }
     }
 }

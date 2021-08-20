@@ -4,16 +4,16 @@ import "DataPB.proto";
 //生成的包名
 package ServerProto;
 service RegistryGrpc {
-  rpc Registry (RegistryService_Request) returns (RegistryService_Response);
-  rpc UnRegistry (UnRegistryService_Request) returns (UnRegistryService_Response);
-  rpc Trick (Trick_Request) returns (Trick_Response);
-  rpc Connect (stream Connect_Request) returns (stream Connect_Response);
-  rpc ConnectRegistry (Connect_Request) returns (stream Connect_Response);
-  rpc ServiceList (ServiceList_Request) returns (ServiceList_Response);
+  rpc Registry (RegistryService_Request) returns (RegistryService_Response);            //注册
+  rpc UnRegistry (UnRegistryService_Request) returns (UnRegistryService_Response);      //注销
+  rpc Trick (Trick_Request) returns (Trick_Response);                                   //心跳
+  //rpc Connect (stream Connect_Request) returns (stream Connect_Response);             //通信
+  rpc ConnectRegistry (Connect_Request) returns (stream Connect_Response);              //注册服务器消息
+  rpc ServiceList (ServiceList_Request) returns (ServiceList_Response);                 //获取服务器列表
 }
 service ServiceGrpc {
-    rpc CallMessage (Server_Message) returns (Server_Message);
-    rpc PushMessage (Service_Info) returns (stream Server_Message);
+    rpc CallMessage (Server_Package) returns (Server_Package);
+    rpc PushMessage (Service_Info) returns (stream Server_Package);
 }
 message RegistryService_Request {
    Service_Info  info = 1; //服务信息
@@ -53,17 +53,8 @@ message Trick_Response{
 }
 
 message ServiceList_Request{
-   int32 serviceType = 1; //服务器类型
+    int32 serviceType = 1; //服务器类型
 }
 message ServiceList_Response{
-  repeated Service_Info services = 1; //服务器列表
-}
-
-message Server_Message {
-    int32 userid = 1; //用户id
-    int32 mian = 2;   //主命令
-    int32 sub = 3 ;    //子命令
-    bytes data = 4 ;   //数据
-    int64 serviceId = 5 ; 
-    int32 serviceType = 6; 
+    repeated Service_Info services = 1; //服务器列表
 }

@@ -22,7 +22,6 @@ namespace Netty.Servre
         public IPAddress Host { get; private set; }
         public int Port { get; private set; }
         public string WebsocketPath { get; private set; }
-        public WebSocketHandler Socket { get; private set; }
 
         private bool _useLibuv = true;
         private IEventLoopGroup _bossGroup;
@@ -32,6 +31,14 @@ namespace Netty.Servre
         private int _maxFrameSize = 65536;
 
         private bool isRun = false;
+
+        public event Action<IChannelHandlerContext, string> OnTextMessage;
+        public event Action<IChannelHandlerContext, byte[]> OnBufferMessage;
+        public event Action<IChannelHandlerContext> OnAddedConnect;
+        public event Action<IChannelHandlerContext> OnRemovedConnect;
+        public event Action<IChannelHandlerContext, Exception> OnExceptionCaught;
+        public event Action<IChannelHandlerContext, object> OnUserEventTriggered;
+
 
         public WebSocketEngine(string host, int port,string websocketPath ="/" ,bool useLibuv = true)
         {
@@ -55,7 +62,7 @@ namespace Netty.Servre
             else
             {
                 _bossGroup = new MultithreadEventLoopGroup(1);
-                _workGroup = new MultithreadEventLoopGroup();
+                _workGroup = new MultithreadEventLoopGroup(10);
             }
             _bootstrap = new ServerBootstrap();
             _bootstrap.Group(_bossGroup, _workGroup);
@@ -97,14 +104,15 @@ namespace Netty.Servre
         private async void reBind()
         {
             await _bootstrapChannel.CloseAsync();
-            //Console.WriteLine("rebind......");
+            Console.WriteLine("rebind......");
             var newChannel = await _bootstrap.BindAsync(Host, Port);
-            //Console.WriteLine("rebind complate");
+            Console.WriteLine("rebind complate");
             Interlocked.Exchange(ref _bootstrapChannel, newChannel);
         }
 
         private void init()
         {
+            
             _bootstrap
                 .Option(ChannelOption.SoBacklog, 8192)
                 .Handler(new ServerChannelRebindHandler(reBind))
@@ -125,7 +133,13 @@ namespace Netty.Servre
                         dropPongFrames: true,
                         enableUtf8Validator: false));
                     pipeline.AddLast(new WebSocketFrameAggregator(_maxFrameSize));
-                    Socket = new WebSocketHandler();
+                    var Socket = new WebSocketHandler();
+                    Socket.OnAddedConnect += OnAddedConnect;
+                    Socket.OnRemovedConnect += OnRemovedConnect;
+                    Socket.OnExceptionCaught += OnExceptionCaught;
+                    Socket.OnTextMessage += OnTextMessage;
+                    Socket.OnBufferMessage += OnBufferMessage;
+                    Socket.OnUserEventTriggered += OnUserEventTriggered;
                     pipeline.AddLast(Socket);
                 }));
             isRun = false;

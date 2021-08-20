@@ -110,7 +110,6 @@ namespace ServerProj.RegistryServer
         {
             await Response(request.ServiceId,responseStream);
         }
-
         public async Task Request(IAsyncStreamReader<Connect_Request> requestStream) 
         {
             while (await requestStream.MoveNext()) 

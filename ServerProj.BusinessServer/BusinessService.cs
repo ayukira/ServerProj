@@ -44,12 +44,19 @@ namespace ServerProj.BusinessServer
         {
             Console.WriteLine(msg);
         }
-        public override Server_Message Call(long serviceid,Server_Message server_message)
+        protected override Server_Package Call(long serviceid, Server_Package package)
         {
-            var str = server_message.Data.ToStringUtf8();
-            Console.WriteLine($"gate {serviceid} call message : {str}");
-            server_message.Data = ByteString.CopyFromUtf8("echo : " + str);
-            return server_message;
+            return package;
+            //var str = package.Data.ToStringUtf8();
+            var msg = TestMessage.Parser.ParseFrom(package.Content);
+            Console.WriteLine($"gate {serviceid} call message : {package.Userid},mes:"+ msg);
+            msg.Msg = "echo:" + msg.Msg;
+            package.Content = msg.ToByteString();
+            package.ServiceId = serviceid;
+            package.ServiceType = (int)ServiceType.Gateway;
+            return package;
+            //package.Data = ByteString.CopyFromUtf8("echo : " + str);
+            //return package;
         }
     }
 }

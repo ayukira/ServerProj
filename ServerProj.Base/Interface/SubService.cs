@@ -9,32 +9,33 @@ namespace ServerProj.Base.Interface
 {
     public class SubService
     {
+        public event Action<Server_Package> OnPush;
         public long SubServiceId => Subservice.ServiceId;
         public BaseService Service;
         public BaseService Subservice;
         private ServiceGrpcClient _client;
         private Channel _channel;
-        public string errorMsg ="";
-        public SubService(BaseService  service,BaseService subService)
+        public string errorMsg = string.Empty;
+        public SubService(BaseService service, BaseService subService)
         {
             Service = service;
             Subservice = subService;
             _channel = new Channel(subService.Host, subService.Port, ChannelCredentials.Insecure);
             _client = new ServiceGrpcClient(_channel);
-            Push();
+            push();
             Console.WriteLine($"sub service {subService.ServiceType}: {subService.ServiceId} ");
         }
-        private void error(string msg) 
+        private void error(string msg)
         {
             errorMsg = msg;
         }
-        public async Task<Server_Message> Call(Server_Message message) 
+        public async Task<Server_Package> Call(Server_Package package)
         {
-            var mes = await _client.CallMessageAsync(message);
+            var result = _client.CallMessageAsync(package).ResponseAsync.Result;
             Console.WriteLine($"Call Message from {SubServiceId}");
-            return mes;
+            return result;
         }
-        private void Push() 
+        private void push()
         {
             var _client = new ServiceGrpcClient(_channel);
             var push = _client.PushMessage(Service.ToServerInfo());
@@ -43,15 +44,11 @@ namespace ServerProj.Base.Interface
             {
                 while (await push.ResponseStream.MoveNext())
                 {
-                    var res = push.ResponseStream.Current;
-                    OnPush(res);
+                    var package = push.ResponseStream.Current;
+                    Console.WriteLine($"Push Message from {SubServiceId}");
+                    OnPush?.Invoke(package);
                 }
             });
-        }
-
-        public void OnPush(Server_Message message) 
-        {
-            Console.WriteLine($"Push Message from {SubServiceId}");
         }
     }
 }

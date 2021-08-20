@@ -2,18 +2,7 @@ syntax = "proto3";
 //生成的包名
 package ServerProto;
 
-message BaseMessage{
-    string  auth = 1;           //身份验证
-    int32   userid = 2;         //用户id
-    int32   msg_type = 3;       //消息类型 1:客户端消息 2:服务端消息 3:服务端推送 4:心跳包
-    int32   main_command = 4;   //主命令
-    int64   command = 5;        //子命令
-    bytes   content = 6;        //消息内容
-    int64   time = 7;           //消息时间
-}
-
-
-
+//服务器信息
 message Service_Info{
     int64 serviceId = 1; //服务器id
     string host = 2;     //服务器grpc host
@@ -21,4 +10,25 @@ message Service_Info{
     int32  serviceType = 4;//服务器类型
     string socketHost = 5;//服务器socketHost
     int32 socketPort = 6;//服务器socketPort
+}
+//Socket包
+message Socket_Package{
+    int32 main_command  = 1;    //主命令
+    int64 command = 2;          //子命令
+    int32 msg_type = 3;         //数据类型 1.通用消息
+    bytes content = 4;          //数据
+    int64 time = 5;             //时间戳
+}
+//服务包
+message Server_Package{
+    int64 service_id = 1;       //服务id
+    int32 service_type = 2;     //服务类型
+    int64 userid = 3;           //用户id
+    int32 main_command  = 4;    //主命令
+    int64 command = 5;          //子命令
+    bytes content = 6;          //数据
+    int64 time = 7;             //时间戳
+}
+message TestMessage{
+    string msg = 1; //消息
 }

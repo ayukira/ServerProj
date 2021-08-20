@@ -13,12 +13,12 @@ namespace ServerProj.GatewayServer
         {
             ResourceLeakDetector.Level = ResourceLeakDetector.DetectionLevel.Disabled;
             engine = new WebSocketEngine(host, port);
-            engine.Socket.OnAddedConnect += socket_OnAddedConnect;
-            engine.Socket.OnRemovedConnect += socket_OnRemovedConnect;
-            engine.Socket.OnExceptionCaught += socket_OnExceptionCaught;
-            engine.Socket.OnTextMessage += socket_OnTextMessage;
-            engine.Socket.OnBufferMessage += socket_OnBufferMessage;
-            engine.Socket.OnUserEventTriggered += socket_OnUserEventTriggered;
+            engine.OnAddedConnect += socket_OnAddedConnect;
+            engine.OnRemovedConnect += socket_OnRemovedConnect;
+            engine.OnExceptionCaught += socket_OnExceptionCaught;
+            engine.OnTextMessage += socket_OnTextMessage;
+            engine.OnBufferMessage += socket_OnBufferMessage;
+            engine.OnUserEventTriggered += socket_OnUserEventTriggered;
             engine.Run().Wait();
         }
 
@@ -34,6 +34,7 @@ namespace ServerProj.GatewayServer
 
         private void socket_OnBufferMessage(IChannelHandlerContext context, byte[] data)
         {
+
         }
 
         private void socket_OnTextMessage(IChannelHandlerContext context, string text)

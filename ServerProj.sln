@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerProj.Base", ".\ServerProj.Base\ServerProj.Base.csproj", "{E0FD8505-FC7B-451B-98F0-011FB604115D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerProj.Base", "ServerProj.Base\ServerProj.Base.csproj", "{E0FD8505-FC7B-451B-98F0-011FB604115D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerProj.RegistryServer", ".\ServerProj.RegistryServer\ServerProj.RegistryServer.csproj", "{A133ADF6-DF99-48E2-B77E-B78612A947F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerProj.RegistryServer", "ServerProj.RegistryServer\ServerProj.RegistryServer.csproj", "{A133ADF6-DF99-48E2-B77E-B78612A947F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerProj.GatewayServer", ".\ServerProj.GatewayServer\ServerProj.GatewayServer.csproj", "{3188F94F-FAC2-4669-99D2-65878F824805}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerProj.GatewayServer", "ServerProj.GatewayServer\ServerProj.GatewayServer.csproj", "{3188F94F-FAC2-4669-99D2-65878F824805}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerProj.SocketServer", ".\ServerProj.SocketServer\ServerProj.SocketServer.csproj", "{6463059C-F8ED-46DA-B5D3-777C2959738A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerProj.SocketServer", "ServerProj.SocketServer\ServerProj.SocketServer.csproj", "{6463059C-F8ED-46DA-B5D3-777C2959738A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerProj.BusinessServer", ".\ServerProj.BusinessServer\ServerProj.BusinessServer.csproj", "{3CF5077F-8937-4044-8D47-C1D9813E57A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerProj.BusinessServer", "ServerProj.BusinessServer\ServerProj.BusinessServer.csproj", "{3CF5077F-8937-4044-8D47-C1D9813E57A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -3,7 +3,7 @@ syntax = "proto3";
 package ServerProto;
 
 message Result_Info {
-    int32 result  =1;
-   int32 code = 2;
-   string message = 3;
+    int32 result  = 1;  //结果
+    int32 code = 2;     //返回代码
+    string message = 3; //返回信息
 }

@@ -7,38 +7,6 @@ var $root = ($protobuf.roots["default"] || ($protobuf.roots["default"] = new $pr
 .addJSON({
   ServerProto: {
     nested: {
-      BaseMessage: {
-        fields: {
-          auth: {
-            type: "string",
-            id: 1
-          },
-          userid: {
-            type: "int32",
-            id: 2
-          },
-          msg_type: {
-            type: "int32",
-            id: 3
-          },
-          main_command: {
-            type: "int32",
-            id: 4
-          },
-          command: {
-            type: "int64",
-            id: 5
-          },
-          content: {
-            type: "bytes",
-            id: 6
-          },
-          time: {
-            type: "int64",
-            id: 7
-          }
-        }
-      },
       Service_Info: {
         fields: {
           serviceId: {
@@ -64,6 +32,70 @@ var $root = ($protobuf.roots["default"] || ($protobuf.roots["default"] = new $pr
           socketPort: {
             type: "int32",
             id: 6
+          }
+        }
+      },
+      Socket_Package: {
+        fields: {
+          main_command: {
+            type: "int32",
+            id: 1
+          },
+          command: {
+            type: "int64",
+            id: 2
+          },
+          msg_type: {
+            type: "int32",
+            id: 3
+          },
+          content: {
+            type: "bytes",
+            id: 4
+          },
+          time: {
+            type: "int64",
+            id: 5
+          }
+        }
+      },
+      Server_Package: {
+        fields: {
+          service_id: {
+            type: "int64",
+            id: 1
+          },
+          service_type: {
+            type: "int32",
+            id: 2
+          },
+          userid: {
+            type: "int64",
+            id: 3
+          },
+          main_command: {
+            type: "int32",
+            id: 4
+          },
+          command: {
+            type: "int64",
+            id: 5
+          },
+          content: {
+            type: "bytes",
+            id: 6
+          },
+          time: {
+            type: "int64",
+            id: 7
+          }
+        }
+      },
+      TestMessage: {
+        fields: {
+          msg: {
+            type: "string",
+            id: 1
           }
         }
       }

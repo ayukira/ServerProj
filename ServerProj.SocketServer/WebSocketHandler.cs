@@ -6,7 +6,7 @@ using System;
 
 namespace Netty.Servre
 {
-    public class WebSocketHandler: SimpleChannelInboundHandler<WebSocketFrame>
+    public class WebSocketHandler : SimpleChannelInboundHandler<WebSocketFrame>
     {
         public event Action<IChannelHandlerContext, string> OnTextMessage;
         public event Action<IChannelHandlerContext, byte[]> OnBufferMessage;
@@ -27,6 +27,7 @@ namespace Netty.Servre
             {
                 var buffer = binaryFrame.Content;
                 if (buffer == null) return;
+                if (!buffer.HasArray) { return; }
                 if (buffer.Array == null) return;
                 var data = buffer.Array.AsSpan().Slice(buffer.ArrayOffset, buffer.ReadableBytes).ToArray();
                 if (data == null) return;
@@ -34,7 +35,11 @@ namespace Netty.Servre
                 //ctx.Channel.WriteAndFlushAsync(new BinaryWebSocketFrame(binaryFrame.Content.RetainedDuplicate()));
             }
         }
-        public override void ChannelReadComplete(IChannelHandlerContext context) => context.Flush();
+        public override void ChannelReadComplete(IChannelHandlerContext context)
+        {
+            //Console.WriteLine("flush");
+            context.Flush();
+        }
 
         public override void UserEventTriggered(IChannelHandlerContext context, object evt)
         {

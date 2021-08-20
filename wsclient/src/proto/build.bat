@@ -1,1 +1,1 @@
-npx pbjs -t json-module -w commonjs -o src/proto/proto.js  src/proto/*.proto
+npx pbjs -t json-module -w commonjs --keep-case -o src/proto/proto.js  src/proto/*.proto
