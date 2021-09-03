@@ -77,7 +77,6 @@ namespace ServerProj.RegistryServer
                         }
                         catch (Exception ex)
                         {
-
                             Console.WriteLine(ex .Message);
                         }
                         var info = new Connect_Response()

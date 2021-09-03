@@ -12,15 +12,6 @@ namespace ServerProj.BusinessServer
             business.Run();
             Console.WriteLine("Business is Running!");
             Console.WriteLine($"Business is {business.ServiceId}");
-            //while (true)
-            //{
-            //    Console.ReadLine();
-            //    business.Push(gateId, new ServerProto.Server_Package
-            //    {
-
-            //    });
-            //    Console.WriteLine($"Send to {gateId}");
-            //}
             Console.WriteLine("按任意键退出");
             Console.ReadKey();
         }

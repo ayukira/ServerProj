@@ -8,7 +8,7 @@ using static ServerProto.ServiceGrpc;
 
 namespace ServerProj.Base.Interface
 {
-    public class SubServiceGrpc : ServiceGrpcBase
+    public class MainServiceGrpc : ServiceGrpcBase
     {
         private readonly ConcurrentDictionary<long, PushQueue> _queues = new();
         private event Func<long, Server_Package, Server_Package> call;
@@ -17,7 +17,7 @@ namespace ServerProj.Base.Interface
             return Task.FromResult(call(package.ServiceId,package));
         }
 
-        public SubServiceGrpc(Func<long, Server_Package, Server_Package> func) 
+        public MainServiceGrpc(Func<long, Server_Package, Server_Package> func) 
         {
             if (func == null) throw new Exception("func is null");
             call = func;

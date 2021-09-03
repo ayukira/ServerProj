@@ -12,45 +12,96 @@ using static ServerProto.RegistryGrpc;
 
 namespace ServerProj.Base.Interface
 {
-    public abstract class AbstractSubService :BaseService
+    public abstract class AbstractSubService : BaseService
     {
-        public abstract override ServiceType ServiceType { get;}
+        public abstract override ServiceType ServiceType { get; }
+        /// <summary>
+        /// this service can sub service type
+        /// </summary>
+        public abstract ServiceType ExcludeType { get; }
+        /// <summary>
+        /// trick delay
+        /// </summary>
+        public abstract int Trick_Delay { get; }
+
+        #region variable
         public string ErrorMessage { get; protected set; }
-        
-        public event Action<Service_Info> OnServiceAdd;
-        public event Action<Service_Info> OnServiceRemove;
-        public event Action<Service_Info> OnPullService;
-        public event Action<string> OnError;
-        
-        protected abstract int Trick_Delay { get; }
-        protected Server Server;
-        protected SubServiceGrpc SubServiceGrpc;
-        protected readonly ConcurrentDictionary<long, BaseService> Servers = new();
+        /// <summary>
+        /// grpc server
+        /// </summary>
+        protected readonly Server Server;
+        /// <summary>
+        /// grpc service instance
+        /// </summary>
+        protected readonly MainServiceGrpc ServiceGrpc;
+        /// <summary>
+        /// this service link services list
+        /// </summary>
+        /// </summary>
+        protected readonly ConcurrentDictionary<long, LinkService> linkServices = new();
+        /// <summary>
+        /// registry host
+        /// </summary>
         private string _registryHost;
+        /// <summary>
+        /// registry port
+        /// </summary>
         private int _registryPort;
+        /// <summary>
+        /// this service registry grpc client
+        /// </summary>
         private RegistryGrpcClient _registryClient;
-        private Channel _channel;
+        /// <summary>
+        /// this service registry grpc channel
+        /// </summary>
+        private readonly Channel _channel;
+        #endregion
 
-        protected abstract Server_Package Call(long serviceid, Server_Package package);
+        #region event
+        public event Action<Service_Info> OnServiceAddBefore;
+        public event Action<Service_Info> OnServiceRemoveBefore;
+        public event Action<bool, Service_Info> OnServiceAddAfter;
+        public event Action<bool, Service_Info> OnServiceRemoveAfter;
+        public event Action<long, Trick_Response> OnTrick;
+        public event Action<string> OnError;
+        #endregion
 
-        public AbstractSubService(string host, int port) 
+        public AbstractSubService(string host, int port)
         {
             Host = host;
             Port = port;
-            if (CUtils.IsPortOccuped(Host, Port)) 
+            if (CUtils.IsPortOccuped(Host, Port))
             {
                 error($"Failed to bind port {Host}:{Port}");
                 throw new Exception(ErrorMessage);
             }
-            SubServiceGrpc = new SubServiceGrpc(Call);
+            ServiceGrpc = new MainServiceGrpc(Call);
             Server = new Server
             {
-                Services = { ServiceGrpc.BindService(SubServiceGrpc) },
-                Ports = { new ServerPort(Host, Port, ServerCredentials.Insecure) }
+                Services = { ServerProto.ServiceGrpc.BindService(ServiceGrpc) },
+                Ports = { new ServerPort(base.Host, base.Port, ServerCredentials.Insecure) }
             };
             config();
             _channel = new Channel(_registryHost, _registryPort, ChannelCredentials.Insecure);
         }
+
+        #region protected abstract action
+        /// <summary>
+        /// other service call this service execute action
+        /// </summary>
+        /// <param name="serviceid"></param>
+        /// <param name="package"></param>
+        /// <returns></returns>
+        protected abstract Server_Package Call(long serviceid, Server_Package package);
+        /// <summary>
+        /// link service push data to this service execute action
+        /// </summary>
+        /// <param name="package"></param>
+        protected abstract void OnPush(Server_Package package);
+
+        #endregion
+
+        #region public
         public bool Run()
         {
             if (_channel.State != ChannelState.Idle)
@@ -59,7 +110,7 @@ namespace ServerProj.Base.Interface
                 return false;
             }
             _registryClient = new RegistryGrpcClient(_channel);
-            if (!registry()) 
+            if (!registry())
             {
                 error($"channel state is {_channel.State}");
                 return false;
@@ -70,20 +121,41 @@ namespace ServerProj.Base.Interface
             Server.Start();
             return true;
         }
-
         public bool Stop()
         {
             _channel.ShutdownAsync();
             Server.ShutdownAsync();
             return true;
         }
-        #region public
-
-        public bool Push(long serviceId, Server_Package package) 
+        /// <summary>
+        /// push data to link service 
+        /// </summary>
+        /// <param name="serviceId"></param>
+        /// <param name="package"></param>
+        /// <returns></returns>
+        public bool PushMessage(long serviceId, Server_Package package)
         {
-            return SubServiceGrpc.DequeuePush(serviceId, package);
+            return ServiceGrpc.DequeuePush(serviceId, package);
         }
+        #endregion
 
+        #region protected virtual
+        protected virtual bool AddLink(Service_Info info)
+        {
+            var service = info.ToServer();
+            var type = (ServiceType)info.ServiceType;
+            if (ExcludeType.HasFlag(type)) return false;
+            var linkSer = new LinkService(this, service);
+            linkSer.OnPush += OnPush;
+            linkServices.AddOrUpdate(linkSer.LinkServiceId, linkSer, (k, v) => linkSer);
+            return true;
+        }
+        protected virtual bool RemoveLink(Service_Info info)
+        {
+            var type = (ServiceType)info.ServiceType;
+            if (ExcludeType.HasFlag(type)) return false;
+            return linkServices.TryRemove(info.ServiceId, out _);
+        }
         #endregion
 
         #region private
@@ -118,8 +190,8 @@ namespace ServerProj.Base.Interface
             foreach (var info in res.Result.Services)
             {
                 if (info.ServiceId == ServiceId) return;
-                Servers.AddOrUpdate(info.ServiceId, info.ToServer(), (k, v) => info.ToServer());
-                OnPullService?.Invoke(info);
+                OnServiceAddBefore?.Invoke(info);
+                OnServiceAddAfter?.Invoke(AddLink(info), info);
             }
         }
         private void trick()
@@ -136,6 +208,7 @@ namespace ServerProj.Base.Interface
                         State = (int)ServiceState,
                         Time = ts
                     });
+                    OnTrick?.Invoke(ts, res);
                     await task;
                 }
             }, TaskCreationOptions.LongRunning);
@@ -165,19 +238,18 @@ namespace ServerProj.Base.Interface
         {
             var info = Service_Info.Parser.ParseFrom(data);
             if (info.ServiceId == ServiceId) return;
-            Servers.AddOrUpdate(info.ServiceId, info.ToServer(), (k, v) => info.ToServer());
-            OnServiceAdd?.Invoke(info);
+            OnServiceAddBefore?.Invoke(info);
+            OnServiceAddAfter?.Invoke(AddLink(info), info);
         }
         private void serviceRemove(ByteString data)
         {
             var info = Service_Info.Parser.ParseFrom(data);
             if (info.ServiceId == ServiceId) return;
-            if (Servers.Remove(info.ServiceId, out _))
-            {
-                OnServiceRemove?.Invoke(info);
-            }
+            OnServiceRemoveBefore?.Invoke(info);
+            OnServiceRemoveAfter?.Invoke(RemoveLink(info), info);
+
         }
-        private void error(string msg) 
+        private void error(string msg)
         {
             ErrorMessage = msg;
             OnError?.Invoke(msg);
